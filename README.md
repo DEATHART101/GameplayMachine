@@ -2,6 +2,9 @@
 
 **A different way to build games: build the gameplay first, then give it a presentation.**
 
+[YouTube: Eduard's GameplayMachine channel](https://www.youtube.com/@eduard-123-k1j)
+| [Download the editor](https://github.com/DEATHART101/GameplayMachine/releases)
+
 GameplayMachine is a C# gameplay framework and desktop editor that separates **gameplay**
 from **display**. Your rules, objects, resources, scenes, and gameplay operations form an
 independently runnable GameplayMachine. Unity, Godot, or a C# application provides the
