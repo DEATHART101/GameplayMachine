@@ -99,6 +99,16 @@ gameplay debugger.
 
 This is an early preview. APIs and exported formats can change.
 
+## Learn with Eduard
+
+[Visit the GameplayMachine YouTube channel](https://www.youtube.com/@eduard-123-k1j)
+for tutorials and development updates from Eduard, the framework's creator.
+The channel explores gameplay-first development, multiplayer networking, save/load,
+debugging, and connecting gameplay data to Unity, Godot, and C# views.
+
+When following a tutorial, use the framework version linked in its video description.
+Preview APIs and editor workflows may differ between releases.
+
 ## Build and run
 
 Install the .NET 10 SDK and .NET 8 runtime. PowerShell 7 is used by the scripts.
