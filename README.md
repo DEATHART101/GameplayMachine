@@ -1,8 +1,94 @@
 # GameplayMachine
 
-GameplayMachine is a C# gameplay framework and desktop editor. Define your data model,
-resources, scenes, and gameplay interfaces in the editor, and export gameplay code for
-C#, Unity, or Godot. Keep rendering and input presentation in the engine.
+**A different way to build games: build the gameplay first, then give it a presentation.**
+
+GameplayMachine is a C# gameplay framework and desktop editor that separates **gameplay**
+from **display**. Your rules, objects, resources, scenes, and gameplay operations form an
+independently runnable GameplayMachine. Unity, Godot, or a C# application provides the
+visuals, sound, UI, and input presentation around it.
+
+You finish and test the gameplay in GameplayMachine Editor first, without needing a game
+scene full of visual objects. Then export it and connect **displayers** to gameplay objects.
+A displayer reacts to data changes instead of owning the rules or polling every frame.
+
+## From gameplay to screen
+
+1. **Define the game.** Create types, fields, resources, scenes, and interfaces in the
+   editor. Write the rules in the generated interface implementation files.
+2. **Run the gameplay.** Test it with the editor runner and inspect its state and interface
+   executions in the gameplay debugger, before adding a presentation layer.
+3. **Connect the presentation.** Export to C#, Unity, or Godot. A runner hosts the machine;
+   a binder associates gameplay objects with views; displayers update those views when
+   their bound data changes. Player input goes back through gameplay interfaces.
+
+For example, define a `Hero` class with an `int Health` field and a gameplay interface
+named `Damage` with inputs `Target` (`Hero`, marked `NotNull`) and `Amount` (`int`).
+In a project named `MyGame`, its generated implementation file can contain:
+
+```csharp
+using System;
+using ODCore;
+
+namespace MyGame;
+
+public partial struct DamageParam
+{
+    private static EventError CanExecute(MyGameGameplayMachineProxy machine, DamageParam input)
+    {
+        if (input.Amount <= 0)
+            return "Damage must be positive.";
+        if (input.Target.Health <= 0)
+            return "Hero is already defeated.";
+        return true;
+    }
+
+    private static void DoExecute(
+        MyGameGameplayMachineProxy machine, DamageParam input, ref DamageResult outResult)
+    {
+        input.Target.Health = Math.Max(0, input.Target.Health - input.Amount);
+    }
+}
+```
+
+That code knows nothing about sprites, scenes in a rendering engine, or health bars.
+After exporting to Unity, attach this view script to a prefab and configure the binder
+to associate it with `Hero` objects:
+
+```csharp
+using MyGame;
+using UnityEngine;
+using UnityEngine.UI;
+
+public sealed class HeroDisplayer : HeroDisplayerBase
+{
+    [SerializeField] private Slider healthBar;
+
+    protected override void OnHealthChanged(int value)
+    {
+        healthBar.value = value;
+    }
+}
+```
+
+`HeroDisplayerBase` is generated from your model. It subscribes to `Health` changes,
+triggers the callback with the current value when binding, and manages subscription
+cleanup when the view is unbound. Set the slider's range in Unity; write only the visual
+response here, not another copy of the damage rules.
+
+```text
+Gameplay interface -> Hero.Health changes -> OnHealthChanged -> Health bar updates
+```
+
+With state synchronization configured, an authoritative change replicated to a client
+reaches the same field-change callback. The view does not need a separate networking
+implementation. The same gameplay can also drive a Godot view or a text-based C# view;
+the presentation changes, not the rules.
+
+This is the workflow GameplayMachine is built around: **a complete, testable game model
+first; an engine-specific presentation second.** Networking and saves operate on the
+gameplay data, while displayers concentrate on how that data looks and sounds.
+
+## Framework features
 
 The framework includes authoritative state synchronization, deterministic lockstep with a
 relay server, generated save/load serialization, observable collections, and a remote
