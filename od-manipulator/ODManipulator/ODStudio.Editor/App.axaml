@@ -1,0 +1,145 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ODStudio.Editor.App"
+             RequestedThemeVariant="Dark">
+  <Application.Resources>
+    <SolidColorBrush x:Key="TitleBarBrush">#181818</SolidColorBrush>
+    <SolidColorBrush x:Key="EditorBackgroundBrush">#1E1E1E</SolidColorBrush>
+    <SolidColorBrush x:Key="SideBarBrush">#252526</SolidColorBrush>
+    <SolidColorBrush x:Key="InputBrush">#313131</SolidColorBrush>
+    <SolidColorBrush x:Key="HoverBrush">#2A2D2E</SolidColorBrush>
+    <SolidColorBrush x:Key="SelectionBrush">#094771</SolidColorBrush>
+    <SolidColorBrush x:Key="BorderBrush">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="TextBrush">#CCCCCC</SolidColorBrush>
+    <SolidColorBrush x:Key="MutedTextBrush">#969696</SolidColorBrush>
+    <SolidColorBrush x:Key="AccentBrush">#007ACC</SolidColorBrush>
+    <SolidColorBrush x:Key="AccentHoverBrush">#1F8AD2</SolidColorBrush>
+  </Application.Resources>
+  <Application.Styles>
+    <FluentTheme />
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{DynamicResource EditorBackgroundBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="FontFamily" Value="Inter" />
+      <Setter Property="FontSize" Value="12" />
+    </Style>
+    <Style Selector="Button">
+      <Setter Property="Background" Value="#2D2D2D" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="BorderBrush" Value="#3C3C3C" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="2" />
+      <Setter Property="Padding" Value="10,4" />
+      <Setter Property="MinHeight" Value="24" />
+    </Style>
+    <Style Selector="Button:pointerover">
+      <Setter Property="Background" Value="#3A3D41" />
+      <Setter Property="BorderBrush" Value="#505050" />
+    </Style>
+    <Style Selector="Button:pressed">
+      <Setter Property="Background" Value="#45494E" />
+    </Style>
+    <Style Selector="Button:disabled">
+      <Setter Property="Opacity" Value="0.45" />
+    </Style>
+    <Style Selector="Button.caption">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="FontFamily" Value="Segoe UI" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="MinWidth" Value="56" />
+      <Setter Property="MinHeight" Value="44" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.caption:pointerover">
+      <Setter Property="Background" Value="#2D2D2D" />
+    </Style>
+    <Style Selector="Button.caption.close:pointerover">
+      <Setter Property="Background" Value="#C42B1C" />
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="{DynamicResource InputBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="BorderBrush" Value="#3C3C3C" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="Padding" Value="6,3" />
+      <Setter Property="MinHeight" Value="24" />
+      <Setter Property="SelectionBrush" Value="{DynamicResource SelectionBrush}" />
+    </Style>
+    <Style Selector="TextBox:focus">
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <Style Selector="ComboBox">
+      <Setter Property="Background" Value="{DynamicResource InputBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="BorderBrush" Value="#3C3C3C" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="MinHeight" Value="24" />
+    </Style>
+    <Style Selector="Menu">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="MenuItem">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="Padding" Value="8,5" />
+    </Style>
+    <Style Selector="MenuItem:pointerover">
+      <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+    </Style>
+    <Style Selector="ListBox">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="ListBoxItem">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="ListBoxItem:pointerover">
+      <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+    </Style>
+    <Style Selector="ListBoxItem:selected">
+      <Setter Property="Background" Value="{DynamicResource SelectionBrush}" />
+    </Style>
+    <Style Selector="ListBox.compactExplorer > ListBoxItem">
+      <Setter Property="MinHeight" Value="22" />
+      <Setter Property="Padding" Value="3,0" />
+    </Style>
+    <Style Selector="TabControl">
+      <Setter Property="Background" Value="{DynamicResource EditorBackgroundBrush}" />
+    </Style>
+    <Style Selector="TabItem">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource MutedTextBrush}" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="Padding" Value="10,6" />
+      <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    <Style Selector="TabItem:selected">
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="Background" Value="#2D2D2D" />
+    </Style>
+    <Style Selector="TextBlock.sectionTitle">
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="Margin" Value="0,10,0,5" />
+    </Style>
+    <Style Selector="Border.panel">
+      <Setter Property="Background" Value="{DynamicResource SideBarBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="GridSplitter">
+      <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
+    </Style>
+  </Application.Styles>
+</Application>

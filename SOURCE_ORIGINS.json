@@ -1,0 +1,66 @@
+{
+  "description": "Initial source snapshots. Original repositories and histories remain unchanged. Uncommitted changes were not imported.",
+  "components": [
+    {
+      "directory": "gameplaymachine_core",
+      "repository": "https://cnb.cool/pixelcatrepo/gameplaymachine_core",
+      "commit": "c976f58"
+    },
+    {
+      "directory": "od-core",
+      "repository": "https://cnb.cool/pixelcatrepo/od-core",
+      "commit": "808d6b659e3b54dace75f5f8ff3c69c5a200ca8f"
+    },
+    {
+      "directory": "xlockstep",
+      "repository": "https://cnb.cool/humble-abode-tech/xlockstep",
+      "commit": "1e56e6bcd6363c4d2b7caf0824461a75f24eb30d"
+    },
+    {
+      "directory": "od-manipulator",
+      "repository": "https://cnb.cool/pixelcatrepo/od-manipulator",
+      "commit": "37e0520cb4055d88d09c12e0a8176b9f1a5c6116"
+    },
+    {
+      "directory": "dependencies/bitstream",
+      "repository": "https://e.coding.net/plana1/nucodelib/bitstream.git",
+      "commit": "3401b5a7a19210f3acebace8fb08207ce9358b84"
+    },
+    {
+      "directory": "dependencies/common_serializer",
+      "repository": "https://e.coding.net/plana1/nucodelib/common_serializer.git",
+      "commit": "2d7a5390d020edb2ecececd378e3f9d3280f76cd"
+    },
+    {
+      "directory": "dependencies/event_system",
+      "repository": "https://e.coding.net/plana1/nucodelib/event_system.git",
+      "commit": "acc799d22e2432a2cb13ddb86980877af80d09e2"
+    },
+    {
+      "directory": "dependencies/lifetime_object",
+      "repository": "https://e.coding.net/plana1/nucodelib/lifetime_object.git",
+      "commit": "a47d7b773eee99539c83988c872cc8b5e02b9ab4"
+    },
+    {
+      "directory": "dependencies/logger",
+      "repository": "https://e.coding.net/plana1/nucodelib/logger.git",
+      "commit": "3cb6b2761ef912d967d383b52e43be9611709675"
+    },
+    {
+      "directory": "dependencies/helper",
+      "repository": "https://e.coding.net/plana1/nucodelib/helper.git",
+      "commit": "aaee8b769ebd8040238b4e4fa3f578c25087d61f"
+    },
+    {
+      "directory": "dependencies/XEnumerator",
+      "repository": "https://e.coding.net/plana1/nucodelib/XEnumerator.git",
+      "commit": "e786989b3521eb0edfa93c9f19f6285d3f1412f4"
+    }
+  ],
+  "excluded": [
+    "XFieldSerializer (unused dependency removed)",
+    "Legacy DLL-container generators",
+    "SaaS/DB stack",
+    "Samples (publication deferred by owner)"
+  ]
+}

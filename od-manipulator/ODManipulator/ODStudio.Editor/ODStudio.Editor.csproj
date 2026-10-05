@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\ODStudio.ico</ApplicationIcon>
+    <AssemblyName>GameplayMachine.Editor</AssemblyName>
+    <Product>GameplayMachine Editor</Product>
+    <Copyright>Copyright (c) 2026 Eduard Xue</Copyright>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+    <None Include="..\..\LICENSE" Link="LICENSE" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\gameplaymachine_core\main\GameplayMachineCore\GameplayMachineCore.csproj" />
+    <ProjectReference Include="..\ODStudio.Export\ODStudio.Export.csproj" />
+    <ProjectReference Include="..\ODStudio.Export.Unity\ODStudio.Export.Unity.csproj" />
+    <ProjectReference Include="..\ODStudio.Generator\ODStudio.Generator.csproj" />
+    <ProjectReference Include="..\ODStudio.Model\ODStudio.Model.csproj" />
+    <ProjectReference Include="..\ODStudio.Package\ODStudio.Package.csproj" />
+  </ItemGroup>
+</Project>

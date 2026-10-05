@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <Authors Condition="'$(Authors)' == ''">Eduard Xue</Authors>
+    <Copyright>Copyright (c) 2026 Eduard Xue</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/DEATHART101/GameplayMachine</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/DEATHART101/GameplayMachine</PackageProjectUrl>
+  </PropertyGroup>
+</Project>

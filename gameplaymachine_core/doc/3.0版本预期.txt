@@ -1,0 +1,11 @@
+1. 取消GameplayMachine的泛型，每个GameplayMachine都可以存储所有类型的GameplayObject
+2. 移除ClassNames和StructNames
+3. 加入非编译器的ClassName和StructName，统一由DataTable负责
+4. SwitchStruct
+5. 更好的valuetype继承（.Value是一个SwitchStruct）
+6. GameplayObject存储MachineID而不是Machine
+7. Proxy Binder
+8. Event Definer
+
+
+1. MaskStruct

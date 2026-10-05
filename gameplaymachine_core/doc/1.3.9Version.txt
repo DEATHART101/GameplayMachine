@@ -1,0 +1,5 @@
+1. DrivenBy.And & DrivenBy.Or
+2. Auto Bind lifetime with displayer without calling bindto displayerlife
+
+Pending
+1. Script calling

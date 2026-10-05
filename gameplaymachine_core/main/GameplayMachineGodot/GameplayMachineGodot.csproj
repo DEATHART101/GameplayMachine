@@ -1,0 +1,12 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ODStudio.Godot.Runtime</RootNamespace>
+    <GodotDisabledSourceGenerators>ScriptPathAttribute</GodotDisabledSourceGenerators>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameplayMachineCore\GameplayMachineCore.csproj" />
+  </ItemGroup>
+</Project>

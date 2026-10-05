@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>XEventSystem</PackageId>
+    <Version>0.0.5</Version>
+    <Authors>eduardxue</Authors>
+    <Company>PixcelCat</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="XLifetimeObject" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../lifetime_object/main/lifetime_object/lifetime_object.csproj" />
+  </ItemGroup>
+</Project>

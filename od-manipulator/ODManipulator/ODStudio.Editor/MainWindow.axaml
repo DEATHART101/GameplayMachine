@@ -1,0 +1,360 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ODStudio.Editor.MainWindow"
+        Title="GameplayMachine Editor"
+        Icon="avares://GameplayMachine.Editor/Assets/ODStudio.ico"
+        Width="1500" Height="900"
+        CanResize="True"
+        MinWidth="1050" MinHeight="650">
+  <Grid RowDefinitions="44,38,*,22">
+    <Border Grid.Row="0"
+            Background="{DynamicResource TitleBarBrush}"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,0,0,1">
+      <Grid ColumnDefinitions="36,Auto,*,168">
+        <Image Width="20" Height="20" Margin="8,0"
+               Source="avares://GameplayMachine.Editor/Assets/ODStudio.png"
+               Stretch="Uniform" />
+
+        <Menu Grid.Column="1" VerticalAlignment="Stretch">
+          <MenuItem Header="_File">
+            <MenuItem Name="NewMenuItem" Header="New Project" InputGesture="Ctrl+N" />
+            <MenuItem Name="OpenMenuItem" Header="Open Project..." InputGesture="Ctrl+O" />
+            <Separator />
+            <MenuItem Name="SaveMenuItem" Header="Save" InputGesture="Ctrl+S" />
+            <Separator />
+            <MenuItem Name="ExitMenuItem" Header="Exit" />
+          </MenuItem>
+          <MenuItem Header="_Edit">
+            <MenuItem Name="UndoMenuItem" Header="Undo" InputGesture="Ctrl+Z" />
+            <MenuItem Name="RedoMenuItem" Header="Redo" InputGesture="Ctrl+Y" />
+            <Separator />
+            <MenuItem Name="RenameMenuItem" Header="Rename" InputGesture="F2" />
+            <MenuItem Name="DeleteMenuItem" Header="Delete" InputGesture="Delete" />
+            <Separator />
+            <MenuItem Name="ProjectSettingsMenuItem" Header="Project Settings" />
+          </MenuItem>
+          <MenuItem Name="AddMenuItem" Header="_Add">
+            <MenuItem Name="AddOdMenu" Header="OD" />
+            <Separator />
+            <MenuItem Name="AddClassMenu" Header="Class" />
+            <MenuItem Name="AddStructMenu" Header="Struct" />
+            <MenuItem Name="AddResourceMenu" Header="Resource" />
+            <MenuItem Name="AddSwitchStructMenu" Header="Switch Struct" />
+            <MenuItem Name="AddEnumMenu" Header="Enum" />
+            <MenuItem Name="AddInterfaceMenu" Header="Interface" />
+            <MenuItem Name="AddPlayerInputMenu" Header="Player Input" />
+            <MenuItem Name="AddEventMenu" Header="Event" />
+          </MenuItem>
+          <MenuItem Name="WindowMenuItem" Header="_Window">
+            <MenuItem Name="ResourcesEditorMenuItem" Header="Resources Editor" />
+            <MenuItem Name="SceneEditorMenuItem" Header="Scene Editor" />
+            <Separator />
+            <MenuItem Name="DebuggerMenuItem" Header="Debugger" />
+          </MenuItem>
+          <MenuItem Name="ProjectMenuItem" Header="_Project">
+            <MenuItem Name="ValidateMenuItem" Header="Validate" />
+            <Separator />
+            <MenuItem Name="BuildMenuItem" Header="Build..." />
+          </MenuItem>
+        </Menu>
+
+        <Border Grid.Column="2" Name="TitleBarDragRegion"
+                Background="Transparent"
+                PointerPressed="OnTitleBarPointerPressed">
+          <StackPanel Orientation="Horizontal" Spacing="7"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Name="WindowTitleText" Text="GameplayMachine Editor" Foreground="#BFBFBF" />
+            <TextBlock Name="DirtyIndicator" Foreground="#E5B566" FontWeight="SemiBold" />
+          </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="3" ColumnDefinitions="56,56,56">
+          <Button Name="MinimizeButton" Classes="caption" Grid.Column="0" ToolTip.Tip="Minimize">
+            <PathIcon Width="14" Height="14" Data="M5 11 L19 11 L19 13 L5 13 Z" />
+          </Button>
+          <Button Name="MaximizeButton" Classes="caption" Grid.Column="1" ToolTip.Tip="Maximize">
+            <PathIcon Width="14" Height="14"
+                      Data="M5 5 L19 5 L19 7 L5 7 Z M5 17 L19 17 L19 19 L5 19 Z M5 7 L7 7 L7 17 L5 17 Z M17 7 L19 7 L19 17 L17 17 Z" />
+          </Button>
+          <Button Name="CloseButton" Classes="caption close" Grid.Column="2" ToolTip.Tip="Close">
+            <PathIcon Width="14" Height="14"
+                      Data="M6 4 L12 10 L18 4 L20 6 L14 12 L20 18 L18 20 L12 14 L6 20 L4 18 L10 12 L4 6 Z" />
+          </Button>
+        </Grid>
+      </Grid>
+    </Border>
+
+    <Border Grid.Row="1" Background="#252526"
+            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+      <Grid ColumnDefinitions="72,128,112,76,Auto,Auto,Auto,Auto,Auto,Auto"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="RUNNER" FontSize="10" FontWeight="SemiBold"
+                   Foreground="{DynamicResource MutedTextBrush}"
+                   VerticalAlignment="Center" Margin="8,0" />
+        <ComboBox Grid.Column="1" Name="RunnerModeCombo" Margin="3,4"
+                  VerticalAlignment="Center" VerticalContentAlignment="Center"
+                  ToolTip.Tip="Runner mode" />
+        <TextBox Grid.Column="2" Name="RunnerAddressTextBox" Text="0.0.0.0"
+                 Margin="3,4" Padding="6,2" VerticalAlignment="Center"
+                 VerticalContentAlignment="Center"
+                 ToolTip.Tip="Authority listen address" />
+        <NumericUpDown Grid.Column="3" Name="RunnerPortInput" Value="7777" Minimum="1" Maximum="65535"
+                       FormatString="0" Margin="3,4" Padding="4,2" ShowButtonSpinner="False"
+                       VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center"
+                       ToolTip.Tip="Authority gameplay port" />
+        <TextBlock Grid.Column="4" Name="RunnerRequestedSlotLabel" Text="Slot" FontSize="10"
+                   Foreground="{DynamicResource MutedTextBrush}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,2,0" />
+        <NumericUpDown Grid.Column="5" Name="RunnerRequestedSlotInput" Value="0" Minimum="0" Maximum="63"
+                       Width="56" FormatString="0" Margin="3,4" Padding="4,2" ShowButtonSpinner="False"
+                       VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center"
+                       ToolTip.Tip="Zero-based Lockstep player slot requested from the Relay" />
+        <TextBlock Grid.Column="6" Name="RunnerPlayerCountLabel" Text="Players" FontSize="10"
+                   Foreground="{DynamicResource MutedTextBrush}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0,2,0" />
+        <NumericUpDown Grid.Column="7" Name="RunnerPlayerCountInput" Value="2" Minimum="1" Maximum="64"
+                       Width="56" FormatString="0" Margin="3,4" Padding="4,2" ShowButtonSpinner="False"
+                       VerticalAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center"
+                       ToolTip.Tip="Expected Lockstep player count" />
+        <Button Grid.Column="8" Name="RunButton" Margin="5,4,3,4" Padding="9,2"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                ToolTip.Tip="Run without debugger (Ctrl+F5)">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <PathIcon Width="12" Height="12" Data="M7 4 L19 12 L7 20 Z" />
+            <TextBlock Text="Run" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="9" Name="DebugButton" Margin="3,4,8,4" Padding="9,2"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                ToolTip.Tip="Run and attach debugger (F5)">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <PathIcon Width="12" Height="12" Data="M7 4 L19 12 L7 20 Z M4 5 L6 5 L6 19 L4 19 Z" />
+            <TextBlock Text="Debug" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="8" Grid.ColumnSpan="2" Name="StopRunnerButton"
+                IsVisible="False" Margin="5,4,8,4" Padding="12,2"
+                VerticalAlignment="Center" HorizontalAlignment="Left"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                ToolTip.Tip="Stop the running GameplayMachine">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <PathIcon Width="11" Height="11" Data="M5 5 L19 5 L19 19 L5 19 Z" />
+            <TextBlock Text="Stop" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="2" ColumnDefinitions="280,4,*,4,340" RowDefinitions="*,190">
+      <Border Grid.Column="0" Grid.RowSpan="2" Classes="panel" BorderThickness="0,0,1,0">
+        <TabControl Name="NavigationTabs" Padding="0">
+          <TabItem Name="ExplorerTab" Header="EXPLORER">
+            <Grid RowDefinitions="35,Auto,*">
+              <Grid ColumnDefinitions="*,Auto" Margin="8,0">
+                <TextBlock Name="BrowseTitleText" VerticalAlignment="Center"
+                           FontSize="11" FontWeight="SemiBold" Text="PROJECT"
+                           Foreground="{DynamicResource MutedTextBrush}" />
+                <Button Grid.Column="1" Name="ReturnToProjectButton" Content="Back"
+                        IsVisible="False" Padding="8,2" Margin="2" />
+              </Grid>
+              <TextBox Grid.Row="1" Name="SearchBox" Margin="8,0,8,8"
+                       PlaceholderText="Filter definitions and data" />
+              <ListBox Grid.Row="2" Name="ExplorerList" SelectionMode="Single" Classes="compactExplorer">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Border Padding="0,0,16,0">
+                  <Grid ColumnDefinitions="20,*,Auto,Auto" MinHeight="20" Margin="{Binding IndentMargin}"
+                        ContextMenu="{Binding ContextMenu}" ToolTip.Tip="{Binding ToolTip}">
+                    <TextBlock Text="{Binding Icon}" FontSize="11" Foreground="#4EC9B0"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="{Binding DisplayName}" FontSize="12"
+                               Foreground="{Binding Foreground}"
+                               FontWeight="{Binding Weight}" VerticalAlignment="Center" />
+                    <Button Grid.Column="2" Width="20" Height="20" MinWidth="20" MinHeight="20"
+                            Padding="0" Margin="1,0"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            IsVisible="{Binding CanEditCode}"
+                            ToolTip.Tip="Edit Code"
+                            Click="OnExplorerEditCodeClick">
+                      <PathIcon Width="12" Height="12"
+                                Data="M5 16 L5 19 L8 19 L19 8 L16 5 Z M14 7 L17 10" />
+                    </Button>
+                    <Button Grid.Column="3" Width="20" Height="20" MinWidth="20" MinHeight="20"
+                            Padding="0" Margin="1,0"
+                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            IsVisible="{Binding CanAdd}"
+                            ToolTip.Tip="{Binding AddToolTip}"
+                            Click="OnExplorerAddClick">
+                      <PathIcon Width="12" Height="12"
+                                Data="M11 5 L13 5 L13 11 L19 11 L19 13 L13 13 L13 19 L11 19 L11 13 L5 13 L5 11 L11 11 Z" />
+                    </Button>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+              </ListBox>
+            </Grid>
+          </TabItem>
+          <TabItem Header="REFERENCES">
+            <Grid RowDefinitions="Auto,*">
+              <Grid ColumnDefinitions="*,Auto" Margin="8">
+                <Button Name="AddPackageReferenceButton" Content="+ Add Package" HorizontalAlignment="Left" />
+                <Button Grid.Column="1" Name="RemovePackageReferenceButton" Content="Remove" IsEnabled="False" />
+              </Grid>
+              <ListBox Grid.Row="1" Name="PackageReferencesList" SelectionMode="Single" Margin="4">
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <StackPanel Margin="6,5" Spacing="2">
+                      <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                      <TextBlock Text="{Binding Status}" FontSize="11" Foreground="{Binding StatusColor}" />
+                      <TextBlock Text="{Binding Path}" FontSize="10" TextTrimming="CharacterEllipsis"
+                                 Foreground="{DynamicResource MutedTextBrush}" />
+                    </StackPanel>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </Grid>
+          </TabItem>
+          <TabItem Name="GameplayMachineTab" Header="GAMEPLAYMACHINE">
+            <ListBox Name="GameplayMachineFunctionsList" SelectionMode="Single"
+                     Classes="compactExplorer" Margin="0,4">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Grid ColumnDefinitions="*,42" RowDefinitions="Auto,Auto,Auto"
+                        MinHeight="56" Margin="8,3" ToolTip.Tip="{Binding Description}">
+                    <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold"
+                               VerticalAlignment="Center" />
+                    <Button Grid.Column="1" Grid.RowSpan="2" Content="Edit" Padding="6,2"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Click="OnGameplayMachineFunctionEditClick" />
+                    <TextBlock Grid.Row="1" Text="{Binding Signature}" FontSize="10"
+                               Foreground="{DynamicResource MutedTextBrush}"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Status}" FontSize="10"
+                               Foreground="#4EC9B0" />
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </TabItem>
+        </TabControl>
+      </Border>
+      <GridSplitter Grid.Column="1" Grid.RowSpan="2" ResizeDirection="Columns" />
+
+      <Border Grid.Column="2" Grid.Row="0"
+              Background="{DynamicResource EditorBackgroundBrush}"
+              BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+        <Grid RowDefinitions="35,*">
+          <Border Background="#252526" BorderBrush="{DynamicResource BorderBrush}"
+                  BorderThickness="0,0,0,1">
+            <Grid ColumnDefinitions="3,*">
+              <Border Background="{DynamicResource AccentBrush}" />
+              <TextBlock Grid.Column="1" Name="DocumentTitle" Margin="10,0"
+                         VerticalAlignment="Center" FontSize="12"
+                         Text="No project open" />
+            </Grid>
+          </Border>
+          <ContentControl Grid.Row="1" Name="EditorHost" />
+        </Grid>
+      </Border>
+
+      <GridSplitter Grid.Column="3" Grid.RowSpan="2" ResizeDirection="Columns" />
+      <Border Grid.Column="4" Grid.RowSpan="2" Classes="panel" BorderThickness="1,0,0,0">
+        <Grid RowDefinitions="35,*">
+          <TextBlock Margin="12,0" VerticalAlignment="Center"
+                     FontSize="11" FontWeight="SemiBold" Text="INSPECTOR"
+                     Foreground="{DynamicResource MutedTextBrush}" />
+          <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+            <ContentControl Name="InspectorHost" Margin="10,0,10,12" />
+          </ScrollViewer>
+        </Grid>
+      </Border>
+
+      <Border Grid.Column="2" Grid.Row="1"
+              Background="{DynamicResource EditorBackgroundBrush}">
+        <TabControl Name="OutputTabs">
+          <TabItem Header="PROBLEMS">
+            <ListBox Name="IssuesList">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Grid ColumnDefinitions="74,70,*" Margin="7,2">
+                    <TextBlock Text="{Binding Severity}" Foreground="{Binding Color}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Code}"
+                               Foreground="{DynamicResource MutedTextBrush}" />
+                    <TextBlock Grid.Column="2" Text="{Binding Message}" TextWrapping="Wrap" />
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </TabItem>
+          <TabItem Header="HISTORY">
+            <ListBox Name="HistoryList">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Grid ColumnDefinitions="70,150,*" Margin="7,2">
+                    <TextBlock Text="{Binding Sequence}" Foreground="{DynamicResource MutedTextBrush}" />
+                    <TextBlock Grid.Column="1" Text="{Binding Timestamp}"
+                               Foreground="{DynamicResource MutedTextBrush}" />
+                    <TextBlock Grid.Column="2" Text="{Binding Summary}" />
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </TabItem>
+          <TabItem Name="GameLogTab" Header="GAME LOG">
+            <Grid RowDefinitions="36,*">
+              <Border Background="#252526"
+                      BorderBrush="{DynamicResource BorderBrush}"
+                      BorderThickness="0,0,0,1">
+                <Grid ColumnDefinitions="*,Auto,44,32" Margin="8,0,4,0">
+                  <TextBlock Grid.Column="1" Text="Clear on play"
+                             VerticalAlignment="Center" Margin="0,0,6,0" />
+                  <ToggleSwitch Grid.Column="2" Name="ClearGameLogOnPlayToggle"
+                                IsChecked="True" Width="40" Height="22"
+                                HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  <Button Grid.Column="3" Name="ClearGameLogButton"
+                          Width="28" Height="24" MinWidth="28" MinHeight="24"
+                          Padding="0" VerticalAlignment="Center"
+                          HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                          ToolTip.Tip="Clear game log">
+                    <PathIcon Width="13" Height="13"
+                              Data="M7 6 L17 6 L16 20 L8 20 Z M5 4 L9 4 L10 2 L14 2 L15 4 L19 4 L19 6 L5 6 Z M10 9 L12 9 L12 17 L10 17 Z M14 9 L16 9 L16 17 L14 17 Z" />
+                  </Button>
+                </Grid>
+              </Border>
+              <ListBox Grid.Row="1" Name="GameLogList" SelectionMode="Single">
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <Grid ColumnDefinitions="84,46,*" Margin="7,1">
+                      <TextBlock Text="{Binding Timestamp}" FontFamily="Cascadia Mono, Consolas"
+                                 FontSize="11" Foreground="{DynamicResource MutedTextBrush}" />
+                      <TextBlock Grid.Column="1" Text="{Binding Stream}" FontFamily="Cascadia Mono, Consolas"
+                                 FontSize="11" Foreground="{Binding Color}" />
+                      <SelectableTextBlock Grid.Column="2" Text="{Binding Message}"
+                                           FontFamily="Cascadia Mono, Consolas" FontSize="11"
+                                           Foreground="{Binding Color}" TextWrapping="NoWrap" />
+                    </Grid>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </Grid>
+          </TabItem>
+        </TabControl>
+      </Border>
+    </Grid>
+
+    <Border Grid.Row="3" Background="{DynamicResource AccentBrush}" Padding="8,0">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Name="StatusText" Text="Ready" Foreground="White"
+                   FontSize="11" VerticalAlignment="Center" />
+        <TextBlock Grid.Column="1" Name="ProjectPathText" Foreground="#E6F4FF"
+                   FontSize="11" VerticalAlignment="Center" />
+      </Grid>
+    </Border>
+    <Border Name="RunnerFrame" Grid.RowSpan="4" BorderBrush="#F14C4C" BorderThickness="2"
+            IsVisible="False" IsHitTestVisible="False" ZIndex="100" />
+  </Grid>
+</Window>

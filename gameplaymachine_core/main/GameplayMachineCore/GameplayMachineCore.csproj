@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>GameplayMachineCore</PackageId>
+    <Version>1.4.3</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2026 Eduard Xue</Copyright>
+    <Authors>eduardxue</Authors>
+    <Company>PixcelCat</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiteNetLib" Version="2.1.4" />
+    <ProjectReference Include="../../../dependencies/common_serializer/main/CommonSerializeDefine/CommonSerialize.csproj" />
+    <ProjectReference Include="..\..\..\od-core\main\ODCore\ODCore.csproj" />
+    <ProjectReference Include="..\..\..\xlockstep\src\XLockstep\XLockstep.csproj" />
+    <ProjectReference Include="../../../dependencies/XEnumerator/main/XEnumerator/XEnumerator.csproj" />
+    <ProjectReference Include="../../../dependencies/event_system/main/event_system/event_system.csproj" />
+    <ProjectReference Include="../../../dependencies/logger/main/XLogger/XLogger.csproj" />
+    <ProjectReference Include="../../../dependencies/helper/main/xhelper/xhelper.csproj" />
+  </ItemGroup>
+</Project>
