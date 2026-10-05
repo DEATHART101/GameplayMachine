@@ -190,7 +190,7 @@ public sealed class UnityExportTests
               </ItemGroup>
             </Project>
             """);
-        var process = Process.Start(new ProcessStartInfo("dotnet", $"build \"{projectFile}\" --nologo -nodeReuse:false")
+        using var process = Process.Start(new ProcessStartInfo("dotnet", $"build \"{projectFile}\" --nologo --disable-build-servers -nodeReuse:false -p:UseSharedCompilation=false")
         {
             WorkingDirectory = _directory,
             RedirectStandardOutput = true,

@@ -194,7 +194,7 @@ public static class GameplayMachineBuildPublisher
     private static string ProjectFile(string projectName, string referenceDirectory)
     {
         string references = string.Join(Environment.NewLine,
-            Directory.EnumerateFiles(referenceDirectory, "*.dll")
+            OdRuntimeReferences.Resolve(referenceDirectory)
                 .OrderBy(item => item, StringComparer.OrdinalIgnoreCase)
                 .Select((path, index) =>
                     $"    <Reference Include=\"GameplayMachineReference{index}\"><HintPath>{SecurityElement.Escape(path)}</HintPath><Private>true</Private></Reference>"));

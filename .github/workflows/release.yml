@@ -32,6 +32,11 @@ jobs:
         run: |
           if ($env:TAG -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$') { throw 'Invalid release tag' }
           ./scripts/package-editor.ps1 -Version $env:TAG.Substring(1)
+      - name: Verify published editor references
+        shell: pwsh
+        env:
+          TAG: ${{ inputs.tag }}
+        run: ./scripts/test-published-editor.ps1 -EditorDirectory "artifacts/GameplayMachine-Editor-$($env:TAG.Substring(1))-win-x64/editor"
       - name: Publish preview
         shell: pwsh
         env:

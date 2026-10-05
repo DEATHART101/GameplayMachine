@@ -68,6 +68,7 @@ supported build. Examples are being prepared separately and are not part of this
 
 ```powershell
 pwsh ./scripts/package-editor.ps1 -Version 0.1.0-preview.1
+pwsh ./scripts/test-published-editor.ps1 -EditorDirectory artifacts/GameplayMachine-Editor-0.1.0-preview.1-win-x64/editor
 ```
 
 Package IDs and assembly versions inside the runtime retain their existing component

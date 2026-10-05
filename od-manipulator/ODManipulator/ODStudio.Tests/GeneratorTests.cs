@@ -1208,7 +1208,7 @@ public sealed class GeneratorTests
             project,
             GameplayMachineBuildOutput.StateSyncCommandLineGame,
             output,
-            AppContext.BaseDirectory,
+            Environment.GetEnvironmentVariable("GAMEPLAYMACHINE_PUBLISHED_EDITOR") ?? AppContext.BaseDirectory,
             progress: new InlineProgress<string>(progressMessages.Add));
 
         Assert.Multiple(() =>

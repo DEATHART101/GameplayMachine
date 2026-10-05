@@ -42,7 +42,7 @@ internal static class OdCodeWorkspaceService
     private static string BuildProjectFile(string projectName)
     {
         string references = string.Join(Environment.NewLine,
-            Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll")
+            OdRuntimeReferences.Resolve(AppContext.BaseDirectory)
                 .OrderBy(item => item, StringComparer.OrdinalIgnoreCase)
                 .Select((path, index) =>
                     $"    <Reference Include=\"GameplayMachineEditorReference{index}\"><HintPath>{SecurityElement.Escape(path)}</HintPath><Private>false</Private></Reference>"));
